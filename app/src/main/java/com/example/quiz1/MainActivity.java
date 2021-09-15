@@ -2,6 +2,7 @@ package com.example.quiz1;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
@@ -19,5 +20,14 @@ public class MainActivity<RegistrarBtn> extends AppCompatActivity {
 
         EstudiantesTxt=  findViewById(R.id.EstudiantesTxt);
         RegistrarBtn=  findViewById(R.id.RegistrarBtn);
+
+
+
+        RegistrarBtn.setOnClickListener((view)->{
+
+            Intent registroIntent = new Intent(this,RegistroActivity.class);
+            startActivity(registroIntent);
+
+        });
     }
 }

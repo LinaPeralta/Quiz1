@@ -2,6 +2,7 @@ package com.example.quiz1;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -23,6 +24,17 @@ public class ActividadActivity extends AppCompatActivity {
         CB2 = findViewById(R.id.CB2);
         CB3 = findViewById(R.id.CB3);
         ContBnt2 = findViewById(R.id.ContBnt2);
+
+
+        ContBnt2.setOnClickListener((view)->{
+
+            Intent autoIntent = new Intent(this,AutoActivity.class);
+            startActivity(autoIntent);
+
+        });
+
+
+
 
 
     }
