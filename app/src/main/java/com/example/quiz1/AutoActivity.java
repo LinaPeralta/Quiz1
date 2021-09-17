@@ -3,6 +3,7 @@ package com.example.quiz1;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -15,6 +16,8 @@ public class AutoActivity extends AppCompatActivity {
     private CheckBox CB6;
     private Button FinalBtn;
     private int puntaje2;
+    private int puntajes;
+    private String subtotal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +28,8 @@ public class AutoActivity extends AppCompatActivity {
         CB5 = findViewById(R.id.CB5);
         CB6 = findViewById(R.id.CB6);
         FinalBtn = findViewById(R.id.FinalBtn);
+
+        puntajes = getIntent().getExtras().getInt("puntosAc");
 
 
         FinalBtn.setOnClickListener((view)->{
@@ -63,9 +68,18 @@ public class AutoActivity extends AppCompatActivity {
 
         if(CB4.isChecked() == true || CB5.isChecked() == true || CB6.isChecked() == true){
 
-            Intent autoIntent = new Intent(this, AutoActivity.class);
+            SharedPreferences preferences = getSharedPreferences("puntaje",MODE_PRIVATE) ;
+            String mnsT = preferences.getString("puntajeTotal","");
 
-            startActivity(autoIntent);
+           subtotal = " " + puntaje2 + puntajes;
+
+            String total = mnsT + ":" + subtotal;
+            preferences.edit().putString("puntajeTotals", total).apply();
+
+
+            Intent mainIntent = new Intent(this, AutoActivity.class);
+          //  mainIntent.putExtra("puntosAc", puntaje2);
+            startActivity(mainIntent);
 
         }else{
             Toast.makeText(getApplicationContext(),"Por favor seleccione una opción para continuar",Toast.LENGTH_SHORT).show();

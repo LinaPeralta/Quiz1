@@ -74,7 +74,7 @@ public class ActividadActivity extends AppCompatActivity {
         if(CB1.isChecked() == true || CB2.isChecked() == true || CB3.isChecked() == true){
 
             Intent autoIntent = new Intent(this, AutoActivity.class);
-
+            autoIntent.putExtra("puntosAc", puntaje);
             startActivity(autoIntent);
 
         }else{
