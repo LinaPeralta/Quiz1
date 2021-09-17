@@ -4,9 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class ActividadActivity extends AppCompatActivity {
 
@@ -14,6 +16,8 @@ public class ActividadActivity extends AppCompatActivity {
     private CheckBox CB2;
     private CheckBox CB3;
     private Button ContBnt2;
+    private int puntaje=0;
+    private boolean click;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,16 +30,57 @@ public class ActividadActivity extends AppCompatActivity {
         ContBnt2 = findViewById(R.id.ContBnt2);
 
 
+
         ContBnt2.setOnClickListener((view)->{
 
-            Intent autoIntent = new Intent(this,AutoActivity.class);
-            startActivity(autoIntent);
+            //metodo de los checkbox donde se suma el puntaje
+                check();
+                //metodo para validar si se ha elegido una opcion
+                validate();
 
         });
 
+    }
+
+    private void check(){
+        String mns = "Seleccionado: \n";
+
+        if (CB1.isChecked()){
+            mns+="Opcion 1";
+            puntaje+=1;
+            click = true;
 
 
+        }
+        if (CB2.isChecked()){
+            mns+="Opcion 2";
+            puntaje+=3;
+            click = true;
 
+        }
+        if (CB3.isChecked()){
+            mns+="Opcion 3";
+            puntaje+=0;
+            click = true;
+
+        }
+
+        Toast.makeText(getApplicationContext(),mns,Toast.LENGTH_SHORT).show();
 
     }
+
+    private void validate(){
+
+        if(CB1.isChecked() == true || CB2.isChecked() == true || CB3.isChecked() == true){
+
+            Intent autoIntent = new Intent(this, AutoActivity.class);
+
+            startActivity(autoIntent);
+
+        }else{
+            Toast.makeText(getApplicationContext(),"Por favor seleccione una opción para continuar",Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
 }
