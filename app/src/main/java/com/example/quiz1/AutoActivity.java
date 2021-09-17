@@ -15,9 +15,10 @@ public class AutoActivity extends AppCompatActivity {
     private CheckBox CB5;
     private CheckBox CB6;
     private Button FinalBtn;
-    private int puntaje2;
-    private int puntajes;
-    private String subtotal;
+    private int puntaje2=0;
+    private int subtotal;
+    private int p2;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +30,7 @@ public class AutoActivity extends AppCompatActivity {
         CB6 = findViewById(R.id.CB6);
         FinalBtn = findViewById(R.id.FinalBtn);
 
-        puntajes = getIntent().getExtras().getInt("puntosAc");
+        p2 = getIntent().getExtras().getInt("puntaje");
 
 
         FinalBtn.setOnClickListener((view)->{
@@ -47,18 +48,18 @@ public class AutoActivity extends AppCompatActivity {
 
         if (CB4.isChecked()){
             mns+="Opcion 1";
-            puntaje2=3;
+            puntaje2+=3;
 
 
         }
         if (CB5.isChecked()){
             mns+="Opcion 2";
-            puntaje2=3;
+            puntaje2+=3;
 
         }
         if (CB6.isChecked()){
             mns+="Opcion 3";
-            puntaje2=0;
+            puntaje2+=0;
 
         }
         Toast.makeText(getApplicationContext(),mns,Toast.LENGTH_SHORT).show();
@@ -68,17 +69,16 @@ public class AutoActivity extends AppCompatActivity {
 
         if(CB4.isChecked() == true || CB5.isChecked() == true || CB6.isChecked() == true){
 
-            SharedPreferences preferences = getSharedPreferences("puntaje",MODE_PRIVATE) ;
-            String mnsT = preferences.getString("puntajeTotal","");
 
-           subtotal = " " + puntaje2 + puntajes;
+           subtotal = puntaje2 + p2;
 
-            String total = mnsT + ":" + subtotal;
-            preferences.edit().putString("puntajeTotals", total).apply();
+
+           SharedPreferences preferences = getSharedPreferences("puntaje",MODE_PRIVATE);
+           preferences.edit().putString("puntos", ""+subtotal).apply();
+            Toast.makeText(this, "" + subtotal, Toast.LENGTH_SHORT).show();
 
 
             Intent mainIntent = new Intent(this, AutoActivity.class);
-          //  mainIntent.putExtra("puntosAc", puntaje2);
             startActivity(mainIntent);
 
         }else{

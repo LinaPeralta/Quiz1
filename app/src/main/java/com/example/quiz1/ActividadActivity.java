@@ -17,7 +17,8 @@ public class ActividadActivity extends AppCompatActivity {
     private CheckBox CB3;
     private Button ContBnt2;
     private int puntaje=0;
-    private boolean click;
+    private String p;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +30,7 @@ public class ActividadActivity extends AppCompatActivity {
         CB3 = findViewById(R.id.CB3);
         ContBnt2 = findViewById(R.id.ContBnt2);
 
+       // p = String.valueOf(puntaje);
 
 
         ContBnt2.setOnClickListener((view)->{
@@ -48,20 +50,20 @@ public class ActividadActivity extends AppCompatActivity {
         if (CB1.isChecked()){
             mns+="Opcion 1";
             puntaje+=1;
-            click = true;
+
 
 
         }
         if (CB2.isChecked()){
             mns+="Opcion 2";
             puntaje+=3;
-            click = true;
+
 
         }
         if (CB3.isChecked()){
             mns+="Opcion 3";
             puntaje+=0;
-            click = true;
+
 
         }
 
@@ -74,7 +76,7 @@ public class ActividadActivity extends AppCompatActivity {
         if(CB1.isChecked() == true || CB2.isChecked() == true || CB3.isChecked() == true){
 
             Intent autoIntent = new Intent(this, AutoActivity.class);
-            autoIntent.putExtra("puntosAc", puntaje);
+            autoIntent.putExtra("puntaje",puntaje);
             startActivity(autoIntent);
 
         }else{
